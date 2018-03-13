@@ -1,0 +1,20 @@
+--This function takes an integer and returns true if odd, false if even
+myOdd::Int -> Bool
+myOdd x 
+ | (x `mod` 2 == 0) = False 
+ | otherwise = True
+
+--This function takes a variable and checks the given list to see if the variable is in the list.
+contains' a [] = False
+contains' a (x:xs)
+ | a == x = True
+ | otherwise = a `contains'` xs
+
+--This function creates a new list from x number of occurences of n and returns the length of that new list. 
+numOccurences :: Int -> [Int] -> Int
+numOccurnces n _
+numOccurences _ [] = 0
+numOccurences n xs = length [ x:[] | x <- xs, n == x]  
+
+
+
