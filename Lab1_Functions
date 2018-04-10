@@ -59,3 +59,14 @@ everyOther (x:xs) = case length (xs) `mod` 2 of
  1 -> if (length (x:xs) `mod` 2 == 1) 
       then  x:everyOther (take 1 xs)
       else x:everyOther (drop 1 xs)
+      
+--This function will return the value at n index of list xs
+--Note: the 0 case is interesting as head xs brings back second number, not x since the notation (x:xs) is actually appending
+ -- the first number x to the list xs. 
+
+get :: (Eq a) => Int -> [a] -> a
+get n [] = error "Empty List!"
+get _ [x] = x
+get 0 (x:xs) = x
+get n (x:xs) = head (drop (n-1) xs) 
+
