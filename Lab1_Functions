@@ -4,11 +4,13 @@ myOdd x
  | (x `mod` 2 == 0) = False 
  | otherwise = True
 
+
 --This function takes a variable and checks the given list to see if the variable is in the list.
 contains' a [] = False
 contains' a (x:xs)
  | a == x = True
  | otherwise = a `contains'` xs
+
 
 --This function creates a new list from x number of occurences of n and returns the length of that new list. 
 numOccurences :: Int -> [Int] -> Int
@@ -17,4 +19,43 @@ numOccurences _ [] = 0
 numOccurences n xs = length [ x:[] | x <- xs, n == x]  
 
 
+--This function will take a list and add 1 to each element of the list
+--Elements must be of class type Num 
 
+addOne :: (Num a) => [a] -> [a]
+addOne [] = 1:[]
+addOne xs = [x + 1 | x <- xs]
+
+
+--This function will take in two lists as args and return if they are lexographically equal or not.
+
+equalsmethod :: (Eq a) => [a] -> [a] -> Bool
+equalsmethod xs ys = xs == ys
+
+justOdds :: [Int] -> [Int]
+justOdds [] = []
+justOdds xs = [x | x <- xs, (x `mod` 2) /= 0]
+
+--This function takes an Int arg and an Int list and removes all occurrences of the arg in list.
+
+removeAll :: Int->[Int] -> [Int]
+removeAll n xs = [x | x <- xs, x /= n]
+
+--This method will remove first occurence of n in list xs
+
+removeFirst :: Int -> [Int] -> [Int]
+
+removeFirst n (x:xs) 
+ | (n == x) = tail (x:xs)
+ | otherwise = x:removeFirst n (xs)
+
+--This function will take a list of integers and return every other number starting with the first [0] index.
+everyOther:: [Int] -> [Int]
+everyOther [] = []
+everyOther (x:xs) = case length (xs) `mod` 2 of 
+ 0 -> if (length (x:xs) `mod` 2 == 0) 
+      then  x:everyOther (take 1 xs)
+      else x:everyOther (drop 1 xs)
+ 1 -> if (length (x:xs) `mod` 2 == 1) 
+      then  x:everyOther (take 1 xs)
+      else x:everyOther (drop 1 xs)
